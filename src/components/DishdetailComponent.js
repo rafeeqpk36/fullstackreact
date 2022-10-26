@@ -1,14 +1,11 @@
 import React,{Component} from "react"
-import{ Card,CardImg,CardImgOverlay,CardBody,CardTitle,CardText} from "reactstrap"
+import{ Card,CardImg,CardBody,CardTitle,CardText} from "reactstrap"
 
 
 class DishDetail extends Component{
-    constructor(props){
+    /*constructor(props){
         super(props);
-        this.state = {      
-        };
-
-    }
+            }*/
     
     renderDish(dish){
         if(dish!=null){return(
@@ -56,7 +53,8 @@ class DishDetail extends Component{
         
     };
     render(){
-        const dish=this.props.choosenDish;
+        const dish=this.props.dish;
+        console.log(dish);
         if (dish == null) {
             return (<div></div>);
         }
@@ -64,9 +62,11 @@ class DishDetail extends Component{
         const commentslist=this.renderComments(dish.comments)
         
         return(
+            <div className="container">
           <div className='row'>
             {dishdetail}  
             {commentslist}                       
+            </div>
             </div>
         
       )
