@@ -22,8 +22,8 @@ const minLength=(len)=>(val)=>(val)&&(val.length>=len);
         })
     }
     handleSubmit(values){
-        console.log("current state is : " + JSON.stringify(values));
-        alert("current state is : " + JSON.stringify(values))
+        this.toggleModal();
+        this.props.addComment(this.props.dishId,values.rating,values.author,values.comment)
         
     };
     
@@ -58,14 +58,14 @@ const minLength=(len)=>(val)=>(val)&&(val.length>=len);
                                 </Col>
                             </Row>
                         <Row className="form-group">
-<Label htmlFor="yourname" md={12}>Your Name</Label>
+<Label htmlFor="author" md={12}>Your Name</Label>
 <Col md={12}>
-    <Control.text model=".yourname" id="yourname" name="yourname" 
+    <Control.text model=".author" id="author" name="author" 
     className="form-control" placeholder="Your Name"
     validators={{required,minLength:minLength(3),maxLength:maxLength(15)}}
     />
     <Errors className='text-danger'
-    model=".yourname"
+    model=".author"
     show="touched"
     messages={{
         required:'Required',
@@ -125,7 +125,7 @@ function RenderDish({dish}){
         }
     }
     
-  function  RenderComments({commnts}){
+  function  RenderComments({commnts,addComment,dishId}){
                     const comm = commnts.map((commnt) => {
                 return (
                     
@@ -152,7 +152,7 @@ function RenderDish({dish}){
             <ul className="ist-unstyled">
             {comm}
             </ul>
-            <CommentForm/>
+            <CommentForm addComment={addComment} dishId={dishId}/>
             </div>)}
             else{
                 return(<div></div>)
@@ -181,7 +181,10 @@ function RenderDish({dish}){
     </div>
           <div className='row'>
             <RenderDish dish={props.dish} />
-            <RenderComments commnts={props.comments} />
+            <RenderComments commnts={props.comments}
+            addComment={props.addComment}
+            dishId={props.dish.id}
+            />
                                
             </div>
             
