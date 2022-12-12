@@ -25,7 +25,7 @@ const minLength=(len)=>(val)=>(val)&&(val.length>=len);
     }
     handleSubmit(values){
         this.toggleModal();
-        this.props.addComment(this.props.dishId,values.rating,values.author,values.comment)
+        this.props.postComment(this.props.dishId,values.rating,values.author,values.comment)
         
     };
     
@@ -127,7 +127,7 @@ function RenderDish({dish}){
         }
     }
     
-  function  RenderComments({commnts,addComment,dishId}){
+  function  RenderComments({commnts,postComment,dishId}){
                     const comm = commnts.map((commnt) => {
                 return (
                     
@@ -154,7 +154,7 @@ function RenderDish({dish}){
             <ul className="ist-unstyled">
             {comm}
             </ul>
-            <CommentForm addComment={addComment} dishId={dishId}/>
+            <CommentForm postComment={postComment} dishId={dishId}/>
             </div>)}
             else{
                 return(<div></div>)
@@ -198,7 +198,7 @@ function RenderDish({dish}){
           <div className='row'>
             <RenderDish dish={props.dish} />
             <RenderComments commnts={props.comments}
-            addComment={props.addComment}
+            postComment={props.postComment}
             dishId={props.dish.id}
             />
                                
